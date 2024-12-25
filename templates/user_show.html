@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <style>
+        section {
+            background-color: #ECF2FF;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        @media (min-width: 1200px) {
+            section {
+                height: 100vh;
+            }
+        }
+    </style>
+    <section>
+        <div class="container py-5">
+            {% if has_profile %}
+            <form action="" class="row g-3">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card mb-4">
+                            <style>
+                                .profile-image {
+                                    width: 150px;
+                                    height: 150px;
+                                    border-radius: 50%;
+                                    object-fit: cover;
+                                }
+                            </style>
+                            <div class="card-body text-center">
+                                <img src="{% if customer.image %}{{ customer.image.url }}{% endif %}" alt="Profile Image" class="profile-image">
+                                <h5 class="my-3">{{ request.user.username }}</h5>
+                                <input type="file" id="image" name="image" accept="image/*" class="form-control-file d-none" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card mb-4">
+                            <div class="card-header" style="font-size: larger;">Account Details</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputgender" class="mb-0">Gender</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select name="gender" class="form-control" id="inputgender" disabled>
+                                            <option value="" disabled selected>Select your gender</option>
+                                            <option value="MALE" {% if customer.gender == "MALE"%} selected {% endif %}>Male</option>
+                                            <option value="FEMALE" {% if customer.gender == "FEMALE" %}selected{% endif %}>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputaddress1" class="mb-0">Address Line 1</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="address_line_1" type="text" class="form-control"
+                                            placeholder="Enter your address" id="inputaddress1" disabled value="{{ customer.address_line_1 }}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputaddress2" class="mb-0">Address Line 2</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="address_line_2" type="text" class="form-control"
+                                            placeholder="Enter your address" id="inputaddress2" disabled value="{{ customer.address_line_2 }}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputcity" class="mb-0">City</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="city" type="text" class="form-control" id="inputcity"
+                                            placeholder="Enter your city" disabled value="{{ customer.city }}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputstate" class="mb-0">State</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="state" type="text" class="form-control" id="inputstate"
+                                            placeholder="Enter your state" disabled value="{{ customer.state }}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputPostal" class="mb-0">Postal Code</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="postal_code" type="text" class="form-control" id="inputPostal"
+                                            placeholder="Enter your postal code" disabled value="{{ customer.postal_code }}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputcountry" class="mb-0">Country</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="country" type="text" class="form-control" id="inputcountry"
+                                            placeholder="Enter your country" disabled value="{{ customer.country }}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <a href="{% url 'user_edit' request.user.id %}" class="btn btn-secondary">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </section>
+    <!-- MDB -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+</body>
+
+</html>

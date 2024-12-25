@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <style>
+        section {
+            background-color: #ECF2FF;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        @media (min-width: 1200px) {
+            section {
+                height: 100vh;
+            }
+        }
+    </style>
+    <section>
+        <div class="container py-5">
+            <form action="" method="POST" enctype="multipart/form-data" class="row g-3">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card mb-4">
+                            <div class="card-body text-center">
+                                <img src="" alt="Profile Image" class="rounded-circle img-fluid" style="width: 150px;">
+                                <h5 class="my-3">{{ request.user.username }}</h5>
+                                <input type="file" id="image" name="image" accept="image/*"
+                                    class="form-control-file d-none">
+                                <button class="btn btn-dark" type="button"
+                                    onclick="document.getElementById('image').click();">Upload new image</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card mb-4">
+                            <div class="card-header" style="font-size: larger;">Account Details</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputgender" class="mb-0">Gender</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select name="gender" class="form-control" id="inputgender" required>
+                                            <option value="" disabled selected>Select your gender</option>
+                                            <option value="MALE">Male</option>
+                                            <option value="FEMALE">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <style>
+                                    select.form-control {
+                                        -webkit-appearance: none;
+                                        -moz-appearance: none;
+                                        appearance: none;
+                                        background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+                                        background-repeat: no-repeat;
+                                        background-position-x: 100%;
+                                        background-position-y: 50%;
+                                        padding-right: 30px;
+                                    }
+                                </style>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputaddress1" class="mb-0">Address Line 1</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="address_line_1" type="text" class="form-control"
+                                            placeholder="Enter your address" id="inputaddress1" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputaddress2" class="mb-0">Address Line 2</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="address_line_2" type="text" class="form-control"
+                                            placeholder="Enter your address" id="inputaddress2" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputcity" class="mb-0">City</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="city" type="text" class="form-control" id="inputcity"
+                                            placeholder="Enter your city" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputstate" class="mb-0">State</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="state" type="text" class="form-control" id="inputstate"
+                                            placeholder="Enter your state" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputPostal" class="mb-0">Postal Code</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="postal_code" type="text" class="form-control" id="inputPostal"
+                                            placeholder="Enter your postal code" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="inputcountry" class="mb-0">Country</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input name="country" type="text" class="form-control" id="inputcountry"
+                                            placeholder="Enter your country" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- MDB -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+</body>
+
+</html>
